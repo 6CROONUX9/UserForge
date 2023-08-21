@@ -11,7 +11,8 @@ const ModalForm = ( {
     updateUser,
     setIsShowModal,
     setIsUserToUpdate,
-    setImgGender
+    imgGetGender,
+    imgGender
 }) => {
 
 const {handleSubmit, register, reset, formState:{errors}} = useForm();
@@ -19,17 +20,17 @@ const [gender, setGender] = useState("female")
 
 // argumento de mi funcion handleSubmit - se ejecuta con el boton
 const submit = (data) => {
-    console.log(gender);
+    data.image_url=imgGender.picture.medium
     if(data.birthday === ""){
         data.birthday  = null
     }
     if(isUserToUpdate){
         updateUser(data, reset)
-        setImgGender(gender)
+        imgGetGender(gender)
         
     }else{
         createUser(data, reset)
-        setImgGender(gender)
+        imgGetGender(gender)
     }
     
     
@@ -43,7 +44,7 @@ const handleClickCloseModal = () => {
 }
 
 const handleGenderOnChange = (e) => {
-    
+    console.log(e.target.value);
     setGender(e.target.value)
     
 
@@ -82,6 +83,19 @@ return (
             </button>
 
             <h2 className="text-center">{isUserToUpdate?"Editar Usuario" : "Crear Usuario"}</h2>
+
+            <div className="flex gap-2  ">
+                <label>
+                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Masculino
+                </label>
+
+                <label>
+                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Femenino
+                </label>
+                
+                {/* <input className="outline-none border-[1px] border-black p-1" id="image_url" type="radio" /> */}
+                
+            </div>
 
             <div className="grid">
                 <label htmlFor="email">Correo</label>
@@ -133,18 +147,7 @@ return (
                 {errors.birthday && <p className="text-red-500 text-xs">{errors.birthday.message}</p>}
             </div>
 
-            <div className="flex gap-2  ">
-                <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Masculino
-                </label>
-
-                <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Femenino
-                </label>
-                
-                {/* <input className="outline-none border-[1px] border-black p-1" id="image_url" type="radio" /> */}
-                
-            </div>
+            
 
             <button className="bg-black rounded-md text-white">{isUserToUpdate?"Guardar Cambios":"Crear Usuarios"}</button>
 
