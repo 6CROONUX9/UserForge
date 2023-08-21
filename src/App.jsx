@@ -15,6 +15,8 @@ function App() {
   const [isShowModal, setIsShowModal] = useState(false) // is -> esta mostrando el modal si ò no
   const [users, setUsers] = useState([])
   const [isUserToUpdate, setIsUserToUpdate] = useState(null) // permite saber si hay informacion o no para editar
+  const [imgGender, setImgGender] = useState(null)
+  
 
   const getAllUsers =() => {
     axios
@@ -23,6 +25,14 @@ function App() {
       .catch((err) => console.log(err))
   }
   
+  const getPicWithGender = () => {
+    const URL = "https://randomuser.me/api/"
+    axios
+      .get(URL)
+      .then(({data}) => console.log(data.results[0]))
+      .catch((err) => console.log(err))
+
+  }
 
   // funcion encargada de crear mis usuarios
   const createUser =(newUser,reset) => {
@@ -58,6 +68,10 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  // const imgGetGender = (gender) => {
+
+  // }
+
 
   const handleClickUpdateUser = (user) => {
     setIsShowModal(true)
@@ -71,6 +85,7 @@ function App() {
 
   useEffect(() => {
     getAllUsers()
+    getPicWithGender()
   }, [])
 
 
@@ -84,7 +99,8 @@ function App() {
           createUser={createUser}
           isUserToUpdate={isUserToUpdate}
           updateUser={updateUser}
-          setIsShowModal={setIsShowModal}/>
+          setIsShowModal={setIsShowModal}
+          setImgGender ={setImgGender }/>
 
     < UserList 
           users={users}

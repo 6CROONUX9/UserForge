@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
 import { EMPTY_FORM_VALUES } from "../shared/constants";
 import { validationEmailInput, validationNameInput, validationPasswordInput } from "../services/users";
@@ -10,21 +10,26 @@ const ModalForm = ( {
     isUserToUpdate,
     updateUser,
     setIsShowModal,
-    setIsUserToUpdate
+    setIsUserToUpdate,
+    setImgGender
 }) => {
 
 const {handleSubmit, register, reset, formState:{errors}} = useForm();
+const [gender, setGender] = useState("female")
 
 // argumento de mi funcion handleSubmit - se ejecuta con el boton
 const submit = (data) => {
+    console.log(gender);
     if(data.birthday === ""){
         data.birthday  = null
     }
     if(isUserToUpdate){
         updateUser(data, reset)
+        setImgGender(gender)
         
     }else{
         createUser(data, reset)
+        setImgGender(gender)
     }
     
     
@@ -36,6 +41,14 @@ const handleClickCloseModal = () => {
     reset(EMPTY_FORM_VALUES)
     setIsUserToUpdate(null)
 }
+
+const handleGenderOnChange = (e) => {
+    
+    setGender(e.target.value)
+    
+
+}
+
 
 //escucha nuestro cambios en isUserToUpdate
 useEffect(() => {
@@ -120,10 +133,18 @@ return (
                 {errors.birthday && <p className="text-red-500 text-xs">{errors.birthday.message}</p>}
             </div>
 
-            {/* <div className="grid">
-                <label htmlFor="image_url">Imagen</label>
-                <input className="outline-none border-[1px] border-black p-1" id="image_url" type="text" {...register("image_url")} />
-            </div> */}
+            <div className="flex gap-2  ">
+                <label>
+                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Masculino
+                </label>
+
+                <label>
+                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Femenino
+                </label>
+                
+                {/* <input className="outline-none border-[1px] border-black p-1" id="image_url" type="radio" /> */}
+                
+            </div>
 
             <button className="bg-black rounded-md text-white">{isUserToUpdate?"Guardar Cambios":"Crear Usuarios"}</button>
 
