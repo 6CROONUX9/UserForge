@@ -18,6 +18,10 @@ function App() {
   //Loader
   const [loaderConfi, setLoaderConfi] = useState(true);
 
+  //Dark
+  const [eventsDark, setEventsDark] = useState(false);
+  const [eventIcono, setEventIcono] = useState(null);
+
   const getAllUsers = () => {
     axios
       .get(BASE_URL + "users/")
@@ -101,8 +105,36 @@ function App() {
     }, 3000);
   }, []);
 
+  //inicio de mi dark 
+  const handleChangeDarkMode = () => {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.removeItem("dark");
+      setEventsDark(false);
+      setEventIcono(<i className="bx bx-moon  text-slate-950 text-3xl"></i>);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("dark", true);
+      setEventsDark(true);
+      setEventIcono(<i className="bx bx-sun  text-blue-500 text-3xl"></i>);
+    }
+  };
+
+  const savedInfo = localStorage.getItem("dark");
+
+
+
+  useEffect(() => {
+    if (savedInfo) {
+      document.documentElement.classList.add("dark");
+      setEventIcono(<i className="bx bx-sun text-blue-500 text-3xl"></i>);
+    } else {
+      setEventIcono(<i className="bx bx-moon text-slate-950 text-3xl"></i>);
+    }
+  }, []);
+
   return (
-    <main className="grid justify-center items-center min-h-screen p-8 bg-white  dark:bg-gray-900  ">
+    <main className="font-fira-roboto grid justify-center items-center min-h-screen p-8 bg-white  dark:bg-gray-900  ">
       <header className="flex flex-col sm:flex-row justify-between items-center pt-4">
         <div className="w-[200px] relative " >
             <div>
@@ -124,6 +156,13 @@ function App() {
         <i class='bx bxs-user-plus pr-2'></i>
         Crear nuevo usuario
       </button>
+      {/* inicio de mi dark */}
+      <button
+            onClick={handleChangeDarkMode}
+            className=" text-white px-4 mb-4 hover:animate-wiggle my-3"
+          >
+            {eventIcono}
+          </button>
       </div>
       
       </header>
