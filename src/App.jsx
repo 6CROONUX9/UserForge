@@ -4,6 +4,7 @@ import ModalForm from "./components/ModalForm";
 import axios from "axios";
 import { EMPTY_FORM_VALUES } from "./shared/constants";
 import UserList from "./components/UserList";
+import Loader from "./components/Loader";
 
 //const BASE_URL = "https://users-crud.academlo.tech/swagger/?format=openapi";
 const BASE_URL = "https://users-crud.academlo.tech/";
@@ -13,6 +14,9 @@ function App() {
   const [users, setUsers] = useState([]);
   const [isUserToUpdate, setIsUserToUpdate] = useState(null); // permite saber si hay informacion o no para editar
   const [imgGender, setImgGender] = useState(null);// imgGender guarda informacion como el genero y la imagen
+
+  //Loader
+  const [loaderConfi, setLoaderConfi] = useState(true);
 
   const getAllUsers = () => {
     axios
@@ -90,11 +94,23 @@ function App() {
     getPicWithGender();
   }, []);
 
+  // efecto para confi loader
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaderConfi(false);
+    }, 3000);
+  }, []);
+
   return (
-    <main className="grid justify-center items-center min-h-screen bg-black ">
-      <header className="flex flex-col sm:flex-row justify-between items-center">
-        <div className="w-[200px] " >
-            <img src="/UserForgeGif.gif" alt="" />
+    <main className="grid justify-center items-center min-h-screen p-8 bg-white  dark:bg-gray-900  ">
+      <header className="flex flex-col sm:flex-row justify-between items-center pt-4">
+        <div className="w-[200px] relative " >
+            <div>
+            <img className="absolute top-0 " src="/LogoUser1.png" alt="" />
+            </div>
+            <div>
+              <img className=" animate-spin-slow"  src="/LogoUser2.png" alt="" />
+            </div>
             
         </div>
         <div className="w-[250px] sm:w-[250px] pb-2">
@@ -129,6 +145,7 @@ function App() {
         deleteUsers={deleteUsers}
         handleClickUpdateUser={handleClickUpdateUser}
       />
+      {loaderConfi &&  <Loader />}
     </main>
   );
 }

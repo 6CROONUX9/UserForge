@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    animation: {
+      'spin-slow': 'spin 8s linear infinite',
+    },
+    extend: {
+      keyframes:{
+        "spin-slow": {
+          "0%, 100%": { transform: 'rotate(360deg)' }
+        }
+      }
+    },
+    
   },
   plugins: [],
 }

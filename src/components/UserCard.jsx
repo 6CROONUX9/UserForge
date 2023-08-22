@@ -12,7 +12,7 @@ const UserCard = ({user,deleteUsers,handleClickUpdateUser}) => {
 
 
     return (    
-        <div class="w-[300px] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-md p-2 ">
+        <div class="w-[270px] max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-md p-2 hover:scale-110 ">
         
             <div class="flex flex-col items-center p-4">
 

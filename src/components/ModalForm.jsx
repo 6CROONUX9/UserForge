@@ -67,12 +67,12 @@ useEffect(() => {
 }, [isUserToUpdate])
 
 return (
-    <section className={`fixed bg-black/60 top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-[opacity_transform] duration-300 ${isShowModal ? "visible opacity-100 sclae-100" : "invisible opacity-0 scale-0"} `}>
+    <section className={`fixed bg-black/60 top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-[opacity_transform] duration-300 ${isShowModal ? "visible opacity-100 sclae-100" : "invisible opacity-0 scale-0"} z-10`}>
 
         
         <form 
             onSubmit={handleSubmit(submit)} 
-            className="bg-white  grid gap-4 p-2 rounded-md relative">
+            className="bg-gray-800  grid gap-4 p-2 rounded-md relative">
 
             <button 
                 type="button"
@@ -100,7 +100,7 @@ return (
             <div className="grid">
                 <label htmlFor="email">Correo</label>
                 <input 
-                    className="outline-none border-[1px] border-black p-1" 
+                    className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="email" 
                     type="text" 
                     {...register("email", validationEmailInput)} /> {/* register me enlaza un campo */}
@@ -110,7 +110,7 @@ return (
             <div className="grid">
                 <label htmlFor="password">Contraseña</label>
                 <input 
-                    className="outline-none border-[1px] border-black p-1" 
+                    className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="password" 
                     type="text" 
                     {...register("password", validationPasswordInput)} />
@@ -120,7 +120,7 @@ return (
             <div className="grid">
                 <label htmlFor="first_name">Nombre</label>
                 <input 
-                    className="outline-none border-[1px] border-black p-1" 
+                    className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="first_name" 
                     type="text" 
                     {...register("first_name", validationNameInput)} />
@@ -130,7 +130,7 @@ return (
             <div className="grid">
                 <label htmlFor="last_name">Apellido</label>
                 <input 
-                    className="outline-none border-[1px] border-black p-1" 
+                    className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="last_name" 
                     type="text" 
                     {...register("last_name", validationNameInput)} />
@@ -140,7 +140,7 @@ return (
             <div className="grid">
                 <label htmlFor="birthday">Cumpleaños</label>
                 <input 
-                    className="outline-none border-[1px] border-black p-1" 
+                    className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="birthday" 
                     type="date" 
                     {...register("birthday")} />
