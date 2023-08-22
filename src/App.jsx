@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import ModalForm from "./components/ModalForm";
 import axios from "axios";
@@ -93,13 +91,27 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main className="grid justify-center items-center min-h-screen bg-black ">
+      <header className="flex flex-col sm:flex-row justify-between items-center">
+        <div className="w-[200px] " >
+            <img src="/UserForgeGif.gif" alt="" />
+            
+        </div>
+        <div className="w-[250px] sm:w-[250px] pb-2">
+          <img src="nombreLogo.png" alt="" />
+        </div>
+      <div>
       <button
         onClick={handleClickOpenModal}
-        className="bg-black p-2 rounded-md text-white"
+        className="bg-[#555A88] p-2 rounded-md text-white"
       >
+        <i class='bx bxs-user-plus pr-2'></i>
         Crear nuevo usuario
       </button>
+      </div>
+      
+      </header>
+      
 
       <ModalForm
         isShowModal={isShowModal}
@@ -117,7 +129,7 @@ function App() {
         deleteUsers={deleteUsers}
         handleClickUpdateUser={handleClickUpdateUser}
       />
-    </>
+    </main>
   );
 }
 

@@ -4,7 +4,7 @@ import UserCard from "./UserCard";
 const UserList = ({users,deleteUsers,handleClickUpdateUser}) => {
   
   return (
-    <section className="grid gap-8">
+    <section className="flex flex-wrap gap-6 justify-center items-center max-w-[1200px] mt-10">
         {
             users.map((user) => 
                 < UserCard 

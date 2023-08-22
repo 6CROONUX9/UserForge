@@ -16,7 +16,7 @@ const ModalForm = ( {
 }) => {
 
 const {handleSubmit, register, reset, formState:{errors}} = useForm();
-const [gender, setGender] = useState("female")
+const [gender, setGender] = useState("")
 
 // argumento de mi funcion handleSubmit - se ejecuta con el boton
 const submit = (data) => {
@@ -67,7 +67,7 @@ useEffect(() => {
 }, [isUserToUpdate])
 
 return (
-    <section className={`fixed bg-black/60 top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-[opacity_transform] duration-300 ${isShowModal ? "visible opacity-100 sclae-100" : "invisible opacity-0 scale-0"}`}>
+    <section className={`fixed bg-black/60 top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-[opacity_transform] duration-300 ${isShowModal ? "visible opacity-100 sclae-100" : "invisible opacity-0 scale-0"} `}>
 
         
         <form 
