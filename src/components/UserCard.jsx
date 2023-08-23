@@ -6,11 +6,6 @@ const UserCard = ({user,deleteUsers,handleClickUpdateUser,modalVisible,setModalV
     
 
 
-    //const [modalVisible, setModalVisible] = useState(false);
-    //const toggleModal = () => {
-    //setModalVisible(true);
-    //console.log(modalVisible);
-    //}
 
     
 
