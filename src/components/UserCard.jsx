@@ -22,10 +22,10 @@ const UserCard = ({user,deleteUsers,handleClickUpdateUser,modalVisible,setModalV
                 <img class="w-24 h-24 mb-3 rounded-full shadow-lg " src={user.image_url} alt="Bonnie image"/>
                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user.first_name} {user.last_name}</h5>
                 <section className="grid w-full border-b-2 border-[#E5E5E5]  border-t-2 py-4    ">
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Correo:</span>
+                    <span class="text-sm text-black ">Correo:</span>
                     <span class="text-sm text-gray-500 dark:text-gray-400">{user.email}</span>
 
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Cumpleaños:</span>
+                    <span class="text-sm text-black">Cumpleaños:</span>
                     <span class="text-sm text-gray-500 dark:text-gray-400"><i className='bx bxs-cake pr-2'></i>{user.birthday?user.birthday:"No se ingreso"}</span>
                 </section>
                 
