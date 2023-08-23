@@ -64,25 +64,13 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-  const getPicWithGender = () => {
-    const URL = "https://randomuser.me/api/";
+
+  const getPicWithGender = (gender) => {
+    const URL = `https://randomuser.me/api/?gender=${gender}`;
     axios
       .get(URL)
       .then(({ data }) => setImgGender(data.results[0]))
       .catch((err) => console.log(err));
-  };
-  const imgGetGender = (gender) => {
-    if (imgGender.gender === gender) {
-    } else {
-      for (let i = 0; i < 10; i++) {
-        getPicWithGender();
-        if (imgGender.gender === gender) {
-          break;
-        }
-      }
-    }
-
-
   };
 
   const handleClickUpdateUser = (user) => {
@@ -97,7 +85,6 @@ function App() {
 
   useEffect(() => {
     getAllUsers();
-    getPicWithGender();
   }, []);
 
   // efecto para confi loader
@@ -152,7 +139,7 @@ function App() {
             onClick={handleClickOpenModal}
             className="bg-[#555A88] p-2 rounded-md text-white"
           >
-            <i class="bx bxs-user-plus pr-2"></i>
+            <i className="bx bxs-user-plus pr-2"></i>
             Crear nuevo usuario
           </button>
           {/* inicio de mi dark */}
@@ -172,7 +159,7 @@ function App() {
         isUserToUpdate={isUserToUpdate}
         updateUser={updateUser}
         setIsShowModal={setIsShowModal}
-        imgGetGender={imgGetGender}
+        getPicWithGender={getPicWithGender}
         imgGender={imgGender}
       />
 
@@ -184,42 +171,95 @@ function App() {
         setModalVisible={setModalVisible}
       />
       {/* disparador del modal */}
-      {modalVisible && <ModalDeleteUser deleteUsers={deleteUsers} setModalVisible={setModalVisible} modalVisible={modalVisible}/>}
+      {modalVisible && (
+        <ModalDeleteUser
+          deleteUsers={deleteUsers}
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+        />
+      )}
       {/* disparador del loader */}
       {loaderConfi && <Loader />}
 
-
-
       <footer className="bg-white rounded-lg shadow dark:bg-gray-900 my-4 ">
-    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-        <div className="sm:flex sm:items-center sm:justify-between">
-            <a href="https://userforge-2023.netlify.app/" className="flex items-center mb-4 sm:mb-0">
-                <img src="/UserForgeLogo.png" className="h-8 mr-3" alt="Flowbite Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">USER FORGE</span>
+        <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+          <div className="sm:flex sm:items-center sm:justify-between">
+            <a
+              href="https://userforge-2023.netlify.app/"
+              className="flex items-center mb-4 sm:mb-0"
+            >
+              <img
+                src="/UserForgeLogo.png"
+                className="h-8 mr-3"
+                alt="Flowbite Logo"
+              />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                USER FORGE
+              </span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li>
-                    <a href="https://github.com/6CROONUX9" className="mr-4  md:mr-6 ">ir al repositorio <span className="hover:underline">Danilo F</span></a>
-                </li>
-                <li  >
-                    <a href="https://github.com/6CROONUX9/UserForge.git" className="mr-2 hover:underline md:mr-2"><i className='bx bxl-github hover:scale-110  text-2xl'></i></a> {/* tarea implementar hover:animate-wiggle  */}
-                    <a href="https://userforge-2023.netlify.app" className="hover:underline  mr-4"><i className='bx bxl-netlify hover:scale-110 text-2xl '></i></a>
-                </li>
-                <li>
-                    <a href="https://github.com/MMiigguueellGS" className="mr-4  md:mr-6 ">ir al repositorio <span className="hover:underline">Miguel G</span></a>
-                </li>
-                <li>
-                    <a href="https://github.com/6CROONUX9/UserForge.git" className="mr-2 hover:underline md:mr-2"><i className='bx bxl-github hover:scale-110  text-2xl'></i></a>
-                    <a href="https://userforge-2023.netlify.app" className="hover:underline"><i className='bx bxl-netlify hover:scale-110 text-2xl '></i></a>
-                </li>
+              <li>
+                <a
+                  href="https://github.com/6CROONUX9"
+                  className="mr-4  md:mr-6 "
+                >
+                  ir al repositorio{" "}
+                  <span className="hover:underline">Danilo F</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/6CROONUX9/UserForge.git"
+                  className="mr-2 hover:underline md:mr-2"
+                >
+                  <i className="bx bxl-github hover:scale-110  text-2xl"></i>
+                </a>{" "}
+                {/* tarea implementar hover:animate-wiggle  */}
+                <a
+                  href="https://userforge-2023.netlify.app"
+                  className="hover:underline  mr-4"
+                >
+                  <i className="bx bxl-netlify hover:scale-110 text-2xl "></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/MMiigguueellGS"
+                  className="mr-4  md:mr-6 "
+                >
+                  ir al repositorio{" "}
+                  <span className="hover:underline">Miguel G</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/6CROONUX9/UserForge.git"
+                  className="mr-2 hover:underline md:mr-2"
+                >
+                  <i className="bx bxl-github hover:scale-110  text-2xl"></i>
+                </a>
+                <a
+                  href="https://userforge-2023.netlify.app"
+                  className="hover:underline"
+                >
+                  <i className="bx bxl-netlify hover:scale-110 text-2xl "></i>
+                </a>
+              </li>
             </ul>
+          </div>
+          <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            © 2023{" "}
+            <a
+              href="https://userforge-2023.netlify.app/"
+              className="hover:underline"
+            >
+              UserForge™
+            </a>
+            . All Rights Reserved.
+          </span>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://userforge-2023.netlify.app/" className="hover:underline">UserForge™</a>. All Rights Reserved.</span>
-    </div>
-</footer>
-
-
+      </footer>
     </main>
   );
 }

@@ -11,26 +11,26 @@ const ModalForm = ( {
     updateUser,
     setIsShowModal,
     setIsUserToUpdate,
-    imgGetGender,
+    getPicWithGender,
     imgGender
 }) => {
 
 const {handleSubmit, register, reset, formState:{errors}} = useForm();
-const [gender, setGender] = useState("")
+const [gender, setGender] = useState("female")
 
 // argumento de mi funcion handleSubmit - se ejecuta con el boton
 const submit = (data) => {
-    data.image_url=imgGender.picture.medium
+    data.image_url=imgGender?.picture.medium
     if(data.birthday === ""){
         data.birthday  = null
     }
     if(isUserToUpdate){
         updateUser(data, reset)
-        imgGetGender(gender)
+        
         
     }else{
         createUser(data, reset)
-        imgGetGender(gender)
+        
     }
     
     
@@ -44,8 +44,8 @@ const handleClickCloseModal = () => {
 }
 
 const handleGenderOnChange = (e) => {
-    console.log(e.target.value);
     setGender(e.target.value)
+    getPicWithGender(gender)
     
 
 }
@@ -55,13 +55,7 @@ const handleGenderOnChange = (e) => {
 useEffect(() => {
     if (isUserToUpdate) {
         reset(isUserToUpdate) 
-            // {
-            // email: isUserToUpdate.email,
-            // password: isUserToUpdate.password,
-            // first_name: isUserToUpdate.first_name,
-            // last_name: isUserToUpdate.last_name,
-            // birthday: isUserToUpdate.birthday,
-            // })
+
     }
 
 }, [isUserToUpdate])
@@ -72,7 +66,7 @@ return (
         
         <form 
             onSubmit={handleSubmit(submit)} 
-            className="bg-gray-800  grid gap-4 p-2 rounded-md relative">
+            className="bg-gray-800  grid gap-4 p-2 rounded-md relative w-[280px]">
 
             <button 
                 type="button"
@@ -82,22 +76,22 @@ return (
                     <i className='bx bx-x-circle text-red-500 text-2xl'  ></i>
             </button>
 
-            <h2 className="text-center">{isUserToUpdate?"Editar Usuario" : "Crear Usuario"}</h2>
+            <h2 className="text-center text-white">{isUserToUpdate?"Editar Usuario" : "Crear Usuario"}</h2>
 
-            <div className="flex gap-2  ">
+            <div className="flex gap-2 text-white ">
                 <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Masculino
+                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Femenino
                 </label>
 
                 <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Femenino
+                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Masculino
                 </label>
                 
-                {/* <input className="outline-none border-[1px] border-black p-1" id="image_url" type="radio" /> */}
+
                 
             </div>
 
-            <div className="grid">
+            <div className="grid text-white">
                 <label htmlFor="email">Correo</label>
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
@@ -107,7 +101,7 @@ return (
                 {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}  {/* aca podemos mostrar nuestros mensajes de modals */} 
             </div>
 
-            <div className="grid">
+            <div className="grid text-white">
                 <label htmlFor="password">Contraseña</label>
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
@@ -117,7 +111,7 @@ return (
                 {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>} 
             </div>
 
-            <div className="grid">
+            <div className="grid text-white">
                 <label htmlFor="first_name">Nombre</label>
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
@@ -127,7 +121,7 @@ return (
                 {errors.first_name && <p className="text-red-500 text-xs">{errors.first_name.message}</p>}  
             </div>
 
-            <div className="grid">
+            <div className="grid text-white">
                 <label htmlFor="last_name">Apellido</label>
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
@@ -137,7 +131,7 @@ return (
                 {errors.last_name && <p className="text-red-500 text-xs">{errors.last_name.message}</p>}
             </div>
 
-            <div className="grid">
+            <div className="grid text-white">
                 <label htmlFor="birthday">Cumpleaños</label>
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
@@ -149,7 +143,7 @@ return (
 
             
 
-            <button className="bg-black rounded-md text-white">{isUserToUpdate?"Guardar Cambios":"Crear Usuarios"}</button>
+            <button className="bg-[#555A88] p-2 rounded-md text-white">{isUserToUpdate?"Guardar Cambios":"Crear Usuarios"}</button>
 
         </form>
     </section>

@@ -5,7 +5,7 @@ return (
             <div className="relative top-[30%] w-full max-w-md max-h-full mx-auto">
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <button
-                    //onClick={toggleModal}
+                    
                     onClick={()=>setModalVisible(null)}
                     
                     type="button"
