@@ -204,7 +204,7 @@ function App() {
                   className="mr-4  md:mr-6 "
                 >
                   ir al repositorio{" "}
-                  <span className="hover:underline">Danilo F</span>
+                  <span className="hover:underline hover:text-red-500 hover:dark:text-[#555A88]">Danilo F</span>
                 </a>
               </li>
               <li>
@@ -228,7 +228,7 @@ function App() {
                   className="mr-4  md:mr-6 "
                 >
                   ir al repositorio{" "}
-                  <span className="hover:underline">Miguel G</span>
+                  <span className="hover:underline hover:text-red-500 hover:dark:text-[#555A88]">Miguel G</span>
                 </a>
               </li>
               <li>
@@ -252,7 +252,7 @@ function App() {
             © 2023{" "}
             <a
               href="https://userforge-2023.netlify.app/"
-              className="hover:underline"
+              className="hover:underline hover:text-red-500 hover:dark:text-[#555A88]"
             >
               UserForge™
             </a>
