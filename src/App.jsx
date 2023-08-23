@@ -5,6 +5,7 @@ import axios from "axios";
 import { EMPTY_FORM_VALUES } from "./shared/constants";
 import UserList from "./components/UserList";
 import Loader from "./components/Loader";
+import ModalDeleteUser from "./components/ModalDeleteUser";
 
 //const BASE_URL = "https://users-crud.academlo.tech/swagger/?format=openapi";
 const BASE_URL = "https://users-crud.academlo.tech/";
@@ -13,7 +14,7 @@ function App() {
   const [isShowModal, setIsShowModal] = useState(false); // is -> esta mostrando el modal si ò no
   const [users, setUsers] = useState([]);
   const [isUserToUpdate, setIsUserToUpdate] = useState(null); // permite saber si hay informacion o no para editar
-  const [imgGender, setImgGender] = useState(null);// imgGender guarda informacion como el genero y la imagen
+  const [imgGender, setImgGender] = useState(null); // imgGender guarda informacion como el genero y la imagen
 
   //Loader
   const [loaderConfi, setLoaderConfi] = useState(true);
@@ -21,6 +22,9 @@ function App() {
   //Dark
   const [eventsDark, setEventsDark] = useState(false);
   const [eventIcono, setEventIcono] = useState(null);
+
+  //Delete User
+  const [modalVisible, setModalVisible] = useState(null);
 
   const getAllUsers = () => {
     axios
@@ -105,7 +109,7 @@ function App() {
     }, 3000);
   }, []);
 
-  //inicio de mi dark 
+  //inicio de mi dark
   const handleChangeDarkMode = () => {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
@@ -122,8 +126,6 @@ function App() {
 
   const savedInfo = localStorage.getItem("dark");
 
-
-
   useEffect(() => {
     if (savedInfo) {
       document.documentElement.classList.add("dark");
@@ -134,39 +136,36 @@ function App() {
   }, []);
 
   return (
-    <main className="font-fira-roboto grid justify-center items-center min-h-screen p-8 bg-white  dark:bg-gray-900  ">
+    <main className="relative font-fira-roboto  justify-center items-center min-h-screen p-8 bg-white  dark:bg-gray-900  ">
       <header className="flex flex-col sm:flex-row justify-between items-center pt-4">
-        <div className="w-[200px] relative " >
-            <div>
+        <div className="w-[200px] relative ">
+          <div>
             <img className="absolute top-0 " src="/LogoUser1.png" alt="" />
-            </div>
-            <div>
-              <img className=" animate-spin-slow"  src="/LogoUser2.png" alt="" />
-            </div>
-            
+          </div>
+          <div>
+            <img className=" animate-spin-slow" src="/LogoUser2.png" alt="" />
+          </div>
         </div>
         <div className="w-[250px] sm:w-[250px] pb-2">
           <img src="nombreLogo.png" alt="" />
         </div>
-      <div>
-      <button
-        onClick={handleClickOpenModal}
-        className="bg-[#555A88] p-2 rounded-md text-white"
-      >
-        <i class='bx bxs-user-plus pr-2'></i>
-        Crear nuevo usuario
-      </button>
-      {/* inicio de mi dark */}
-      <button
+        <div>
+          <button
+            onClick={handleClickOpenModal}
+            className="bg-[#555A88] p-2 rounded-md text-white"
+          >
+            <i class="bx bxs-user-plus pr-2"></i>
+            Crear nuevo usuario
+          </button>
+          {/* inicio de mi dark */}
+          <button
             onClick={handleChangeDarkMode}
-            className=" text-white px-4 mb-4 hover:animate-wiggle my-3"
+            className="absolute top-3 right-3 text-white px-4 mb-4 hover:animate-wiggle my-3"
           >
             {eventIcono}
           </button>
-      </div>
-      
+        </div>
       </header>
-      
 
       <ModalForm
         isShowModal={isShowModal}
@@ -183,8 +182,12 @@ function App() {
         users={users}
         deleteUsers={deleteUsers}
         handleClickUpdateUser={handleClickUpdateUser}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
       />
-      {loaderConfi &&  <Loader />}
+      {modalVisible && <ModalDeleteUser deleteUsers={deleteUsers} setModalVisible={setModalVisible} modalVisible={modalVisible}/>}
+
+      {loaderConfi && <Loader />}
     </main>
   );
 }

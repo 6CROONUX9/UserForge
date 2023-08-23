@@ -1,7 +1,7 @@
 import UserCard from "./UserCard";
 
 //me renderisa los usuarios
-const UserList = ({users,deleteUsers,handleClickUpdateUser}) => {
+const UserList = ({users,deleteUsers,handleClickUpdateUser,modalVisible,setModalVisible}) => {
   
   return (
     <section className="flex flex-wrap gap-6 justify-center items-center max-w-[1200px] mt-10">
@@ -12,6 +12,8 @@ const UserList = ({users,deleteUsers,handleClickUpdateUser}) => {
                   user={user}
                   deleteUsers={deleteUsers}
                   handleClickUpdateUser={handleClickUpdateUser}
+                  modalVisible={modalVisible}
+                  setModalVisible={setModalVisible}
                   />)
         }
     </section>
