@@ -11,7 +11,7 @@ const ModalForm = ( {
     updateUser,
     setIsShowModal,
     setIsUserToUpdate,
-    getPicWithGender,
+    getPicWithGender, //getPicWithGender
     imgGender
 }) => {
 
@@ -20,7 +20,7 @@ const [gender, setGender] = useState("female")
 
 // argumento de mi funcion handleSubmit - se ejecuta con el boton
 const submit = (data) => {
-    data.image_url=imgGender?.picture.medium
+    data.image_url=imgGender
     if(data.birthday === ""){
         data.birthday  = null
     }
@@ -43,13 +43,17 @@ const handleClickCloseModal = () => {
     setIsUserToUpdate(null)
 }
 
-const handleGenderOnChange = (e) => {
-    setGender(e.target.value)
-    getPicWithGender(gender)
+const handleGenderOnChange = () => {
+    
+    gender === "female" ? setGender("male") : setGender("female");
+    
     
 
 }
 
+useEffect(() => {
+    getPicWithGender(gender);
+}, [gender]);
 
 //escucha nuestro cambios en isUserToUpdate
 useEffect(() => {
@@ -80,11 +84,11 @@ return (
 
             <div className="flex gap-2 text-white ">
                 <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value="male"/> Femenino
+                    <input onChange={handleGenderOnChange} checked={gender==="male"}  type="radio" name="male" value={gender}/> Femenino
                 </label>
 
                 <label>
-                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value="female"/> Masculino
+                    <input onChange={handleGenderOnChange} checked={gender==="female"} type="radio" name="female" value={gender}/> Masculino
                 </label>
                 
 
@@ -106,7 +110,8 @@ return (
                 <input 
                     className="outline-none border-[1px] border-black p-1 bg-gray-400" 
                     id="password" 
-                    type="text" 
+                    type="text"
+                    autoComplete="off" 
                     {...register("password", validationPasswordInput)} />
                 {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>} 
             </div>

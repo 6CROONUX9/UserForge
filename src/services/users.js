@@ -16,7 +16,7 @@ export const  validationPasswordInput = {
     },
     pattern:{
         value:/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-        message: "No cumple con el formato de contraseña"
+        message: "No cumple con el formato de contraseñauna contraseña que debe tener ocho caracteres, incluida una letra mayúscula, un carácter especial y caracteres alfanuméricos (!@#$%^&*)"
     }
 }
 
